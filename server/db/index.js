@@ -1,14 +1,15 @@
 import mongoose from 'mongoose';
 import User from './User';
-import Post from './Post';
+import Argument from './Argument';
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/graphql_demo');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/argueme');
 
 const db = {
   connection: mongoose.connection,
   models: {
-    Author,
-    Book,
+    User,
+    Argument,
+
   }
 };
 

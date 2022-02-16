@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const PostSchema = new mongoose.Schema({
+const ArgumentSchema = new mongoose.Schema({
   opinion: {
     type: String,
     required: true,
@@ -15,6 +15,6 @@ const PostSchema = new mongoose.Schema({
   }
 });
 
-const Post = mongoose.model("Post", PostSchema);
+const Argument = mongoose.model("Argument", ArgumentSchema);
 
-export default Post;
+export default Argument;

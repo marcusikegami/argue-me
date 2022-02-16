@@ -1,10 +1,6 @@
 import mongoose from 'mongoose';
 
 const CommentSchema = new mongoose.Schema({
-  opinion: {
-    type: String,
-    required: true,
-  },
   argument: {
     type: String,
     required: true
