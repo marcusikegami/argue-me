@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import Author from './Author.js';
-import Book from './Book.js';
+import User from './User';
+import Post from './Post';
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/graphql_demo');
 
