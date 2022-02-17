@@ -10,11 +10,9 @@ const CommentSchema = new mongoose.Schema({
     ref: 'User',
   },
   for: {
-      type: mongoose.Schema.Types.Boolean,
+      type: Boolean,
       required: true
   }
 });
 
-const Comment = mongoose.model("Comment", CommentSchema);
-
-export default Comment;
+module.exports = CommentSchema;

@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 const ArgumentSchema = new mongoose.Schema({
   opinion: {
     type: String,
@@ -15,6 +14,4 @@ const ArgumentSchema = new mongoose.Schema({
   }
 });
 
-const Argument = mongoose.model("Argument", ArgumentSchema);
-
-export default Argument;
+export default ArgumentSchema ;

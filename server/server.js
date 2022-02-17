@@ -3,7 +3,7 @@ import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { typeDefs, resolvers } from './graphql/index.js';
 import auth from './utils/auth.js';
-import db from './db/index.js';
+import db from './config/connection.js';
 
 const app = express();
 const PORT = 5000;
@@ -11,10 +11,10 @@ const PORT = 5000;
 const server = new ApolloServer({ 
   typeDefs, 
   resolvers,
-  // context: ({ req }) => {
-  //   // const user = auth.authenticateToken(req);
-  //   // return { user };
-  // }
+  context: ({ req }) => {
+    const user = auth.authenticateToken(req);
+    return { user };
+  }
 });
 
 await server.start();
