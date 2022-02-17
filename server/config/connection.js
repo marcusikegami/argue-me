@@ -1,9 +1,7 @@
 import mongoose from 'mongoose';
-import ArgumentSchema  from '../models/Argument.js';
-import UserSchema from '../models/User.js';
+import User from '../models/User.js';
+import Argument from '../models/Argument.js';
 
-const Argument = mongoose.model('Argument', ArgumentSchema);
-const User = mongoose.model('User', UserSchema)
 
 mongoose.connect(
   process.env.MONGODB_URI || 'mongodb://localhost:27017/deep-thoughts',

@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { typeDefs, resolvers } from './graphql/index.js';
+import { typeDefs, resolvers } from './schemas/index.js';
 import auth from './utils/auth.js';
 import db from './config/connection.js';
 
@@ -11,10 +11,10 @@ const PORT = 5000;
 const server = new ApolloServer({ 
   typeDefs, 
   resolvers,
-  context: ({ req }) => {
-    const user = auth.authenticateToken(req);
-    return { user };
-  }
+  // context: ({ req }) => {
+  //   const user = auth.authenticateToken(req);
+  //   return { user };
+  // }
 });
 
 await server.start();

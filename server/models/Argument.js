@@ -13,5 +13,6 @@ const ArgumentSchema = new mongoose.Schema({
     ref: 'User',
   }
 });
+const Argument = mongoose.model('Argument', ArgumentSchema);
 
-export default ArgumentSchema ;
+export default Argument ;
