@@ -5,14 +5,14 @@ const typeDefs = gql`
         _id: ID,
         username: String,
         email: String,
-        posts: [Post]
+        arguments: [Argument]
     }
 
-    type Post {
+    type Argument {
         _id: ID
         opinion: String
-        arument: String
-        author: ID
+        argument: String
+        author: [User]
     }
 
     type Comment {
@@ -36,10 +36,10 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addUser(username: String, email: String!, password: String!): Auth
+        addUser(username: String!, email: String!, password: String!): Auth
         addArgument(opinion: String!, argument: String!): Argument
-        AddComment(argument: String!, for: Boolean!): Argument
-        login(email: String!, passoword: String!): Auth
+        addComment(argument: String!, for: Boolean!): Argument
+        login(email: String!, password: String!): Auth
     }
 `;
 

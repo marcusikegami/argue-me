@@ -3,25 +3,29 @@ import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { typeDefs, resolvers } from './schemas/index.js';
 import auth from './utils/auth.js';
+import jwt from 'jsonwebtoken';
 import db from './config/connection.js';
 
 const app = express();
 const PORT = 5000;
 
+
 const server = new ApolloServer({ 
   typeDefs, 
   resolvers,
-  // context: ({ req }) => {
+  context: auth.authenticateToken
+  // ({ req }) => {
   //   const user = auth.authenticateToken(req);
   //   return { user };
   // }
 });
-
 await server.start();
+server.applyMiddleware({ app });
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-server.applyMiddleware({ app });
+
 
 
 db.connection.once("open", () => {

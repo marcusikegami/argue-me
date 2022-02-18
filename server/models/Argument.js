@@ -1,5 +1,10 @@
 import mongoose from 'mongoose';
+// import dateFormat from '../utils/dateFormat';
 const ArgumentSchema = new mongoose.Schema({
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
   opinion: {
     type: String,
     required: true,
@@ -8,10 +13,12 @@ const ArgumentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    // get: timestamp => dateFormat(timestamp)
   }
+  
 });
 const Argument = mongoose.model('Argument', ArgumentSchema);
 

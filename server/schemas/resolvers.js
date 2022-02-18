@@ -4,6 +4,7 @@ import User from '../models/User.js';
 import Argument from '../models/Argument.js';
 import auth from'../utils/auth.js'; 
 
+
 const resolvers = {
     Query: {
         me: async (parent, args, context) => {
@@ -21,7 +22,7 @@ const resolvers = {
         users: async () => {
                 return User.find()
                 .select('-__v -password')
-                .populate('arguments');
+                // .populate('arguments');
             },
         user: async (parent, { username }) => {
             return User.findOne({ username })
@@ -58,6 +59,7 @@ const resolvers = {
             }
       
             const token = auth.signToken(user);
+            
             return { token, user };
           },
           addArgument: async (parent, args, context) => {
@@ -66,7 +68,7 @@ const resolvers = {
       
               await User.findByIdAndUpdate(
                 { _id: context.user._id },
-                { $push: { arguments: argument._id } },
+                { $push: { arguments: argument._id }, author: context.user._id },
                 { new: true }
               );
       
@@ -77,10 +79,12 @@ const resolvers = {
           },
           addComment: async (parent, { argumentId, commentBody }, context) => {
             if (context.user) {
-              const updatedArgument = await argument.findOneAndUpdate(
+              const updatedArgument = await Argument.findOneAndUpdate(
                 { _id: argumentId },
-                { $push: { comments: { commentBody, username: context.user.username } } },
-                { new: true, runValidators: true }
+                { $push: { comments: { commentBody, author: context.user.username } } },
+                { new: true, 
+                  // runValidators: true
+                 }
               );
       
               return updatedArgument;
