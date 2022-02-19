@@ -12,13 +12,16 @@ const typeDefs = gql`
         _id: ID
         opinion: String
         argument: String
-        author: [User]
+        author: String
+        createdAt: String
+        comments: [Comment]
     }
 
     type Comment {
+        argumentId: ID
         _id: ID
-        argument: String
-        for: Boolean
+        commentBody: String
+        agree: Boolean
         author: ID
     }
 
@@ -38,7 +41,7 @@ const typeDefs = gql`
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         addArgument(opinion: String!, argument: String!): Argument
-        addComment(argument: String!, for: Boolean!): Argument
+        addComment(argumentId: ID!, commentBody: String!, agree: Boolean!): Argument
         login(email: String!, password: String!): Auth
     }
 `;

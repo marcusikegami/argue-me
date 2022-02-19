@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-// import dateFormat from '../utils/dateFormat';
+import CommentSchema from './Comment.js';
+
 const ArgumentSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
@@ -13,6 +14,7 @@ const ArgumentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  comments: [CommentSchema],
   createdAt: {
     type: Date,
     default: Date.now,

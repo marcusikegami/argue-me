@@ -2,6 +2,7 @@
 import { AuthenticationError } from 'apollo-server-express';
 import User from '../models/User.js';
 import Argument from '../models/Argument.js';
+import Comment from '../models/Comment.js';
 import auth from'../utils/auth.js'; 
 
 
@@ -29,12 +30,18 @@ const resolvers = {
               .select('-__v -password')
               .populate('arguments');
           },
-        arguments: async (parent, { username }) => {
+        arguments: async (parent, { username }, context) => {
             const params = username ? { username } : {};
-            return Argument.find(params).sort({ createdAt: -1 });
+            return Argument.find(params)
+            .select('-__v')
+            .populate('comments')
+            .sort({ createdAt: -1 });
           },
         argument: async (parent, { _id }) => {
-            return Argument.findOne({ _id });
+            return Argument.findOne({ _id })
+            .select('-__v')
+            .populate('comments')
+            .sort({ createdAt: -1 });
           }
     },
 
@@ -64,11 +71,11 @@ const resolvers = {
           },
           addArgument: async (parent, args, context) => {
             if (context.user) {
-              const argument = await Argument.create({ ...args, username: context.user.username });
+              const argument = await Argument.create({ ...args, author: context.user._id });
       
-              await User.findByIdAndUpdate(
+              await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $push: { arguments: argument._id }, author: context.user._id },
+                { $push: { arguments: argument._id } },
                 { new: true }
               );
       
@@ -77,15 +84,16 @@ const resolvers = {
       
             throw new AuthenticationError('You need to be logged in!');
           },
-          addComment: async (parent, { argumentId, commentBody }, context) => {
+          addComment: async (parent, {argumentId, agree, commentBody,  } , context) => {
             if (context.user) {
+              
               const updatedArgument = await Argument.findOneAndUpdate(
                 { _id: argumentId },
-                { $push: { comments: { commentBody, author: context.user.username } } },
+                { $addToSet: { comments: { commentBody, agree, author: context.user._id } } },
                 { new: true, 
                   // runValidators: true
                  }
-              );
+              )
       
               return updatedArgument;
             }
