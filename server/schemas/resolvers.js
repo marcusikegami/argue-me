@@ -13,6 +13,7 @@ const resolvers = {
                 const userData = await User.findOne({ _id: context.user._id })
                 .select('-__v -password')
                 .populate('arguments');
+                
 
                 return userData;
             }
@@ -23,7 +24,7 @@ const resolvers = {
         users: async () => {
                 return User.find()
                 .select('-__v -password')
-                // .populate('arguments');
+                .populate('arguments');
             },
         user: async (parent, { username }) => {
             return User.findOne({ username })
@@ -63,6 +64,7 @@ const resolvers = {
       
             if (!correctPw) {
               throw new AuthenticationError('Incorrect credentials');
+              
             }
       
             const token = auth.signToken(user);
