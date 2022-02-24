@@ -1,6 +1,6 @@
 
 # ArgueMe
-[![License](https://img.shields.io/github/license/marcusikegami/argueme)](LICENSE.txt)
+[![License](https://img.shields.io/github/license/marcusikegami/argue-me)](LICENSE.txt)
 
 ## Table of Contents
 * [Description](#description)
