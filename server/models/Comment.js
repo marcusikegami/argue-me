@@ -1,24 +1,19 @@
 import mongoose from 'mongoose';
 
 const CommentSchema = new mongoose.Schema({
-  opinion: {
+  commentBody: {
     type: String,
     required: true,
-  },
-  argument: {
-    type: String,
-    required: true
+    unique: true
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  for: {
+  agree: {
       type: mongoose.Schema.Types.Boolean,
       required: true
   }
 });
 
-const Comment = mongoose.model("Comment", CommentSchema);
-
-export default Comment;
+export default CommentSchema;

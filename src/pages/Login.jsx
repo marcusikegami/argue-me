@@ -18,27 +18,7 @@ const Login = (props) => {
         e.preventDefault();
         login({ variables: { name: username } });
       }}>
-        <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            type="text"
-            name="username"
-            value={username}
-            onChange={(e) =>{ 
-              setUsername(e.target.value);
-              console.log(username);
-            }}
-          />
-        
-
-        <button>Login</button>
-      </form>
-
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        login({ variables: { name: username } });
-      }}>
-        <label htmlFor="username">Create Account</label>
+        <label htmlFor="username">
           <input
             id="username"
             type="text"
@@ -46,7 +26,7 @@ const Login = (props) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        
+        </label>
 
         <button>Login</button>
       </form>
