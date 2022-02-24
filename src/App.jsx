@@ -4,6 +4,8 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 
+
+
 function App() {
   const [user, setUser] = useState({ token: '', author: null });
   console.log(user);

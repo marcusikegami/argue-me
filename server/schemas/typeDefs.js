@@ -1,24 +1,27 @@
-const { gql } = require("apollo-server-express");
+import {gql} from 'apollo-server-express';
 
 const typeDefs = gql`
     type User {
         _id: ID,
         username: String,
         email: String,
-        posts: [Post]
+        arguments: [Argument]
     }
 
-    type Post {
+    type Argument {
         _id: ID
         opinion: String
-        arument: String
-        author: ID
+        argument: String
+        author: String
+        createdAt: String
+        comments: [Comment]
     }
 
     type Comment {
+        argumentId: ID
         _id: ID
-        argument: String
-        for: Boolean
+        commentBody: String
+        agree: Boolean
         author: ID
     }
 
@@ -36,11 +39,11 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addUser(username: String, email: String!, password: String!): Auth
+        addUser(username: String!, email: String!, password: String!): Auth
         addArgument(opinion: String!, argument: String!): Argument
-        AddComment(argument: String!, for: Boolean!): Argument
-        login(email: String!, passoword: String!): Auth
+        addComment(argumentId: ID!, commentBody: String!, agree: Boolean!): Argument
+        login(email: String!, password: String!): Auth
     }
 `;
 
-module.exports = typeDefs;
+export default typeDefs;

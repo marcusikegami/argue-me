@@ -1,18 +1,19 @@
 import mongoose from 'mongoose';
 
 const CommentSchema = new mongoose.Schema({
-  argument: {
+  commentBody: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  for: {
-      type: Boolean,
+  agree: {
+      type: mongoose.Schema.Types.Boolean,
       required: true
   }
 });
 
-module.exports = CommentSchema;
+export default CommentSchema;

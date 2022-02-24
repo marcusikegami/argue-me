@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 
 const UserSchema = new mongoose.Schema({
@@ -20,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     minlength: 6
   },
 
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }]
+  arguments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Argument" }]
 },
 {
   toJSON: {
@@ -43,5 +44,7 @@ UserSchema.methods.isCorrectPassword = async function(password) {
   return bcrypt.compare(password, this.password);
 };
 
+const User = mongoose.model('User', UserSchema)
+// const User = {};
 
-export default UserSchema;
+export default User;
