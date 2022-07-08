@@ -13,11 +13,8 @@ const PORT = 5000;
 const server = new ApolloServer({ 
   typeDefs, 
   resolvers,
+  cache: 'bounded',
   context: auth.authenticateToken
-  // ({ req }) => {
-  //   const user = auth.authenticateToken(req);
-  //   return { user };
-  // }
 });
 await server.start();
 server.applyMiddleware({ app });

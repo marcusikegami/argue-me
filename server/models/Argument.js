@@ -14,6 +14,7 @@ const ArgumentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  // the comments key holds an array which follows the comment schema.
   comments: [CommentSchema],
   createdAt: {
     type: Date,

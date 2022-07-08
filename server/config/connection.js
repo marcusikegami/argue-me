@@ -4,7 +4,7 @@ import Argument from '../models/Argument.js';
 
 
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost:27017/argume',
+  process.env.MONGODB_URI || 'mongodb://localhost:27017/argueme',
   {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
